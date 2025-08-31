@@ -1,1 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Quicksand:wght@300..700&display=swap");
+
+:root {
+  /* body font override */
+  --bs-font-sans-serif: "Quicksand", Roboto, sans-serif;
+  font-size: 20px;
+
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+}
+
+
+#errors {
+  color: red;
+}
+
+#board {
+  width: 450px;
+  height: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+#number-inputs {
+  width: 450px;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 10px;
+}
+
+.tile {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid var(--gray-400);
+
+  font-weight: 600;
+}
+
+.tile-prefilled {
+  background-color: var(--gray-200);
+}
+
+.sector-edge-horizontal {
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.sector-edge-vertical {
+  border-right: 1px solid var(--gray-700);
+}
+
+.number-input {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid var(--gray-700);
+  margin: 2px;
+
+  font-weight: 600;
+}
+
+.number-input-selected {
+  background-color: var(--gray-200);
+}
+
+h1 {
+  font-family: "Goldman", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: var(--bs-gray-900);
+  padding: .25rem 0;
+}
+
+body {
+  text-align: center;
 }
