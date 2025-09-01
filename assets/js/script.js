@@ -100,44 +100,6 @@ function selectTile() {
 
 //returns tile id in format row-column-sector
 function getTileId(row, column) {
-  let sector = 0;
-  switch (true) {
-    case row < 3:
-      if (column < 3) {
-        sector = 1;
-        break;
-      }
-      if (column < 6) {
-        sector = 2;
-        break;
-      }
-      sector = 3;
-      break;
-
-    case row < 6:
-      if (column < 3) {
-        sector = 4;
-        break;
-      }
-      if (column < 6) {
-        sector = 5;
-        break;
-      }
-      sector = 6;
-      break;
-
-    case row >= 6:
-      if (column < 3) {
-        sector = 7;
-        break;
-      }
-      if (column < 6) {
-        sector = 8;
-        break;
-      }
-      sector = 9;
-      break;
-  }
-
+  let sector = ((column - column % 3) / 3) + (row - row % 3) + 1;
   return `${row}-${column}-${sector}`;
 }
