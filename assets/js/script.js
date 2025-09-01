@@ -1,3 +1,7 @@
+import {
+  generateSudoku
+} from "./generator.js"
+
 var numSelected = null;
 var tileSelected = null;
 var puzzle = null;
@@ -14,37 +18,17 @@ window.onload = function () {
 function reset() {
   errors = 0;
   error = "";
-  getPuzzle();
+  generatePuzzle();
   drawBoard();
   drawInputs();
 }
 
-//fethcing the puzzle
-function getPuzzle() {
-  //there will be puzzle fetch
-  puzzle = [
-    ["6", "0", "0", "0", "3", "0", "0", "0", "0"],
-    ["0", "0", "3", "0", "0", "2", "0", "0", "0"],
-    ["9", "0", "1", "0", "0", "0", "3", "5", "6"],
-    ["0", "0", "0", "9", "4", "0", "0", "1", "0"],
-    ["0", "0", "0", "0", "0", "5", "0", "0", "3"],
-    ["0", "7", "6", "2", "0", "3", "0", "0", "0"],
-    ["7", "0", "0", "4", "0", "0", "0", "0", "5"],
-    ["5", "1", "0", "0", "0", "7", "4", "0", "0"],
-    ["4", "0", "0", "5", "2", "0", "8", "6", "0"]
-  ];
+//generating the puzzle
+function generatePuzzle() {
+  const generated = generateSudoku("medium");
 
-  solution = [
-    ["6", "5", "7", "1", "3", "9", "2", "4", "8"],
-    ["8", "4", "3", "6", "5", "2", "9", "7", "1"],
-    ["9", "2", "1", "8", "7", "4", "3", "5", "6"],
-    ["3", "8", "5", "9", "4", "6", "7", "1", "2"],
-    ["2", "9", "4", "7", "1", "5", "6", "8", "3"],
-    ["1", "7", "6", "2", "8", "3", "5", "9", "4"],
-    ["7", "6", "2", "4", "9", "8", "1", "3", "5"],
-    ["5", "1", "8", "3", "6", "7", "4", "2", "9"],
-    ["4", "3", "9", "5", "2", "1", "8", "6", "7"]
-  ];
+  puzzle = generated.puzzle;
+  solution = generated.solution;
 }
 
 //adding number input elemnts
