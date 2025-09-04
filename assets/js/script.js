@@ -4,29 +4,56 @@ import {
 
 var numSelected = null;
 var tileSelected = null;
+
 var puzzle = null;
 var solution = null;
+var state = null;
 
 var errors = 0;
-var error = "";
 
 window.onload = function () {
-  reset();
+  start();
 }
 
-//reset function, called on load and reset
-function reset() {
-  errors = 0;
-  error = "";
-  generatePuzzle();
+function start() {
+  if (localStorage.getItem("state") !== null) {
+    loadState();
+  } else {
+    generatePuzzle();
+  }
+
   drawBoard();
   drawInputs();
+  saveGameState();
 }
+
+function saveGameState() {
+  updatePuzzle();
+  updateState();
+}
+
+function updateState() {
+  localStorage.setItem("state", JSON.stringify(state));
+  localStorage.setItem("errors", errors);
+}
+
+function updatePuzzle() {
+  localStorage.setItem("puzzle", JSON.stringify(puzzle));
+  localStorage.setItem("solution", JSON.stringify(solution));
+
+}
+
+function loadState() {
+  errors = parseInt(localStorage.getItem("errors"));
+  puzzle = JSON.parse(localStorage.getItem("puzzle"));
+  solution = JSON.parse(localStorage.getItem("solution"));
+  state = JSON.parse(localStorage.getItem("state"));
+}
+
 
 //generating the puzzle
 function generatePuzzle() {
   const generated = generateSudoku("medium");
-
   puzzle = generated.puzzle;
   solution = generated.solution;
 }
@@ -41,6 +68,8 @@ function drawInputs() {
     number.addEventListener("click", selectNumber)
     document.getElementById("number-inputs").appendChild(number);
   }
+
+  document.getElementById("errors").innerText = errors;
 }
 
 //drawing a board
@@ -50,16 +79,23 @@ function drawBoard() {
       let tile = document.createElement("div");
       tile.id = getTileId(r, c);
       tile.classList.add("tile");
-      tile.addEventListener("click", selectTile);
-      if (puzzle[r][c] != 0) {
-        tile.innerText = puzzle[r][c];
+      if (puzzle[r][c] == 0) {
+        tile.addEventListener("click", selectTile);
+      } else {
         tile.classList.add("tile-prefilled");
       }
 
+      //drawing prefilled and inputed numbers
+      if (state[r][c] != 0) {
+        tile.innerText = state[r][c];
+      }
+
+      //drawing horizontal sector division line
       if (r == 2 || r == 5) {
         tile.classList.add("sector-edge-horizontal");
       }
 
+      //drawing vertical sector division line
       if (c == 2 || c == 5) {
         tile.classList.add("sector-edge-vertical");
       }
@@ -80,9 +116,6 @@ function selectNumber() {
 
 function selectTile() {
   if (numSelected) {
-    if (this.innerText != "") {
-      return;
-    }
 
     let coords = this.id.split("-");
     let r = parseInt(coords[0]);
@@ -90,10 +123,13 @@ function selectTile() {
 
     if (solution[r][c] == numSelected.id) {
       this.innerText = numSelected.id;
+      state[r][c] = parseInt(numSelected.id);
     } else {
       errors += 1;
       document.getElementById("errors").innerText = errors;
     }
+
+    updateState();
   }
 }
 
