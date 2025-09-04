@@ -22,8 +22,8 @@
 }
 
 #board {
-  width: 450px;
-  height: 450px;
+  width: 27rem;
+  height: 27rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -32,18 +32,18 @@
 }
 
 #number-inputs {
-  width: 450px;
-  height: 50px;
+  width: 27rem;
+  height: 3rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 20px auto 10px;
+  margin: 1rem auto;
 }
 
 .tile {
-  width: 50px;
-  height: 50px;
+  width: 3rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,14 +66,13 @@
 }
 
 .number-input {
-  width: 46px;
-  height: 46px;
+  width: 2.75rem;
+  height: 2.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border: 1px solid var(--gray-700);
-  margin: 2px;
+  outline: 1px solid var(--gray-700);
 
   font-weight: 600;
 }
