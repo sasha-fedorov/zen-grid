@@ -181,7 +181,6 @@ function selectNumber() {
 
 function selectTile() {
   if (numSelected) {
-
     let coords = this.id.split("-");
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
@@ -195,6 +194,11 @@ function selectTile() {
     }
 
     updateState();
+
+    //checks is puzzle done
+    if (!state.flat().includes(0)) {
+      puzzleCompleteAlert();
+    }
   }
 }
 
@@ -202,4 +206,52 @@ function selectTile() {
 function getTileId(row, column) {
   let sector = ((column - column % 3) / 3) + (row - row % 3) + 1;
   return `${row}-${column}-${sector}`;
+}
+
+//dispalays alert on puzzle complition
+function puzzleCompleteAlert() {
+  const withErrors = [
+    "Congrats! You finished the puzzle. Start a new one, or click Restart to try again without mistakes.",
+    "Puzzle complete! You can pick another difficulty or restart to aim for a flawless solve.",
+    "Well played! Choose a new game or restart this one to go for a perfect score."
+  ];
+
+  const easyPerfect = [
+    "Great job! You solved the Easy puzzle with no mistakes. Step it up with Medium difficulty!",
+    "Perfect clear! Easy mode conquered without errors. Try a Medium puzzle next.",
+    "Flawless solve on Easy! Ready to take on a bigger challenge in Medium?"
+  ];
+
+  const mediumPerfect = [
+    "Impressive! You finished the Medium puzzle with no mistakes. Can you handle Hard mode?",
+    "Outstanding work! Medium solved flawlessly — challenge yourself with Hard next.",
+    "Perfect Medium game! No errors at all. Time to test your skills in Hard mode."
+  ];
+
+  const hardPerfect = [
+    "Outstanding! You mastered Hard mode with zero mistakes!",
+    "Incredible — a flawless Hard puzzle solve! You’re a true Sudoku pro.",
+    "Perfect game! Hard mode completed without errors. Can you keep the streak?",
+  ];
+
+  const seed = Math.floor(Math.random() * 3);;
+  let message = "";
+
+  if (errors == 0) {
+    switch (mode) {
+      case "easy":
+        message = easyPerfect[seed];
+        break;
+      case "medium":
+        message = mediumPerfect[seed];
+        break;
+      case "hard":
+        message = hardPerfect[seed];
+        break;
+    }
+  } else {
+    message = withErrors[seed];
+  }
+
+  window.alert(message);
 }
