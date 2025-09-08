@@ -25,6 +25,11 @@
   margin: 1rem auto;
 }
 
+#mode {
+  display: inline-flex;
+  width: 15rem;
+}
+
 #errors {
   margin: 0;
 }
@@ -34,10 +39,16 @@
   font-weight: 600;
 }
 
-/* fixing double border in mode selector */
-#medium {
-  border-left: none;
-  border-right: none;
+#restart {
+  width: 5rem;
+  height: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--gray-600);
+  background-color: inherit;
 }
 
 #board {
@@ -60,11 +71,6 @@
   margin: 1rem auto;
 }
 
-.mode-selector {
-  display: inline-flex;
-  width: 15rem;
-}
-
 .mode-label {
   width: 5rem;
   height: 2rem;
@@ -77,6 +83,7 @@
   border-right: none;
 }
 
+/* fixing double border in mode selector */
 .mode-selector>label:last-child {
   border-right: 1px solid var(--gray-600);
 }
