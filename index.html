@@ -21,18 +21,32 @@
   </header>
 
   <main>
-    <!-- errors counter -->
-    <h3 id="errors">0</h2>
+    <div id="controls">
+      <!-- mode selector -->
+      <div id="mode" class="mode-selector">
+        <input id="easy" type="radio" name="mode">
+        <label for="easy" class="mode-label">Easy</label>
 
-      <!-- play board -->
-      <div id="board"></div>
+        <input id="medium" type="radio" name="mode">
+        <label for="medium" class="mode-label">Medium</label>
 
-      <!-- inputs -->
-      <div id="number-inputs"></div>
+        <input id="hard" type="radio" name="mode">
+        <label for="hard" class="mode-label">Hard</label>
+      </div>
+
+      <!-- errors counter -->
+      <p id="errors">Errors: <span id="errors-counter">0</span></p>
+    </div>
+
+    <!-- play board -->
+    <div id="board"></div>
+
+    <!-- inputs -->
+    <div id="number-inputs"></div>
   </main>
 
 
-  <footer id="footer" class="container-fluid text-center p-3 bg-body-tertiary">
+  <footer id="footer" class="container-fluid text-center p-3">
     <a href="https://github.com/sasha-fedorov" class="link-dark link-underline-opacity-0" target="_blank"
       rel="external">© 2025 Copyright: Sasha
       Fedorov</a>
