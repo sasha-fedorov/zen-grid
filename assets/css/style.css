@@ -16,9 +16,28 @@
   --gray-900: #212529;
 }
 
+#controls {
+  width: 27rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 1rem auto;
+}
 
 #errors {
+  margin: 0;
+}
+
+#errors-counter {
   color: red;
+  font-weight: 600;
+}
+
+/* fixing double border in mode selector */
+#medium {
+  border-left: none;
+  border-right: none;
 }
 
 #board {
@@ -39,6 +58,35 @@
   justify-content: space-between;
   align-items: center;
   margin: 1rem auto;
+}
+
+.mode-selector {
+  display: inline-flex;
+  width: 15rem;
+}
+
+.mode-label {
+  width: 5rem;
+  height: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--gray-600);
+  border-right: none;
+}
+
+.mode-selector>label:last-child {
+  border-right: 1px solid var(--gray-600);
+}
+
+.mode-selector input:checked+.mode-label {
+  background-color: var(--gray-200);
+}
+
+.mode-selector input {
+  display: none;
 }
 
 .tile {

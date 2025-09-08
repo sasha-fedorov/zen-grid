@@ -8,20 +8,44 @@ var tileSelected = null;
 var puzzle = null;
 var solution = null;
 var state = null;
+var mode = "medium";
 
 var errors = 0;
 
 window.onload = function () {
+  onInit();
   start();
 }
 
-function start() {
+function onInit() {
+  addModeLisener();
+
   if (localStorage.getItem("state") !== null) {
     loadState();
   } else {
     generatePuzzle();
   }
+}
 
+function addModeLisener() {
+  const radios = document.querySelectorAll('input[name="mode"]');
+
+  radios.forEach(radio => {
+    //radio.addEventListener("change", changeMode);
+    radio.addEventListener("click", newGame);
+  });
+}
+
+function newGame(event) {
+  if (window.confirm("Do you want to start a new " + event.target.id + " game?")) {
+    errors = 0;
+    mode = event.target.id;
+    generatePuzzle();
+    start();
+  }
+}
+function start() {
+  updateValues();
   drawBoard();
   drawInputs();
   saveGameState();
@@ -38,9 +62,9 @@ function updateState() {
 }
 
 function updatePuzzle() {
+  localStorage.setItem("mode", mode);
   localStorage.setItem("puzzle", JSON.stringify(puzzle));
   localStorage.setItem("solution", JSON.stringify(solution));
-
 }
 
 function loadState() {
@@ -48,32 +72,48 @@ function loadState() {
   puzzle = JSON.parse(localStorage.getItem("puzzle"));
   solution = JSON.parse(localStorage.getItem("solution"));
   state = JSON.parse(localStorage.getItem("state"));
+  mode = localStorage.getItem("mode");
 }
 
+function updateValues() {
+  document.getElementById("errors-counter").innerText = errors;
+  let currentMode = document.getElementById(mode);
+  currentMode.checked = true;
+}
 
 //generating the puzzle
 function generatePuzzle() {
-  const generated = generateSudoku("medium");
+  const generated = generateSudoku(mode);
   puzzle = generated.puzzle;
   solution = generated.solution;
+  state = puzzle;
 }
 
 //adding number input elemnts
 function drawInputs() {
+  let numberInputs = document.getElementById("number-inputs");
+  //not draws inputs when existed
+  if (numberInputs.hasChildNodes()) {
+    return;
+  }
+
   for (let i = 1; i <= 9; i++) {
     let number = document.createElement("div"); //Number Input Element
     number.id = i;
     number.innerText = i;
     number.classList.add("number-input");
     number.addEventListener("click", selectNumber)
-    document.getElementById("number-inputs").appendChild(number);
+    numberInputs.appendChild(number);
   }
-
-  document.getElementById("errors").innerText = errors;
 }
 
 //drawing a board
 function drawBoard() {
+  let board = document.getElementById("board");
+  if (board.hasChildNodes()) {
+    board.replaceChildren()
+  }
+
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
       let tile = document.createElement("div");
@@ -100,7 +140,7 @@ function drawBoard() {
         tile.classList.add("sector-edge-vertical");
       }
 
-      document.getElementById("board").appendChild(tile);
+      board.appendChild(tile);
     }
   }
 }
@@ -126,13 +166,12 @@ function selectTile() {
       state[r][c] = parseInt(numSelected.id);
     } else {
       errors += 1;
-      document.getElementById("errors").innerText = errors;
+      document.getElementById("errors-counter").innerText = errors;
     }
 
     updateState();
   }
 }
-
 
 //returns tile id in format row-column-sector
 function getTileId(row, column) {
