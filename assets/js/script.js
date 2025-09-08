@@ -13,13 +13,14 @@ var mode = "medium";
 var errors = 0;
 
 window.onload = function () {
+  //localStorage.clear();
+
   onInit();
   start();
 }
 
 function onInit() {
   addModeLisener();
-
   if (localStorage.getItem("state") !== null) {
     loadState();
   } else {
@@ -29,13 +30,13 @@ function onInit() {
 
 function addModeLisener() {
   const radios = document.querySelectorAll('input[name="mode"]');
-
   radios.forEach(radio => {
     //radio.addEventListener("change", changeMode);
     radio.addEventListener("click", newGame);
   });
 }
 
+//starts a new game
 function newGame(event) {
   if (window.confirm("Do you want to start a new " + event.target.id + " game?")) {
     errors = 0;
@@ -44,6 +45,8 @@ function newGame(event) {
     start();
   }
 }
+
+//graving board and inputs for game
 function start() {
   updateValues();
   drawBoard();
@@ -51,22 +54,26 @@ function start() {
   saveGameState();
 }
 
+//saves state of the game
 function saveGameState() {
   updatePuzzle();
   updateState();
 }
 
+//updates game state values
 function updateState() {
   localStorage.setItem("state", JSON.stringify(state));
   localStorage.setItem("errors", errors);
 }
 
+//updates game puzzle values
 function updatePuzzle() {
   localStorage.setItem("mode", mode);
   localStorage.setItem("puzzle", JSON.stringify(puzzle));
   localStorage.setItem("solution", JSON.stringify(solution));
 }
 
+//loads saved values from local storadge 
 function loadState() {
   errors = parseInt(localStorage.getItem("errors"));
   puzzle = JSON.parse(localStorage.getItem("puzzle"));
@@ -75,13 +82,14 @@ function loadState() {
   mode = localStorage.getItem("mode");
 }
 
+//updates loaded values on page
 function updateValues() {
   document.getElementById("errors-counter").innerText = errors;
   let currentMode = document.getElementById(mode);
   currentMode.checked = true;
 }
 
-//generating the puzzle
+//generates the puzzle
 function generatePuzzle() {
   const generated = generateSudoku(mode);
   puzzle = generated.puzzle;
@@ -89,7 +97,7 @@ function generatePuzzle() {
   state = puzzle;
 }
 
-//adding number input elemnts
+//adds number input elemnts
 function drawInputs() {
   let numberInputs = document.getElementById("number-inputs");
   //not draws inputs when existed
@@ -107,7 +115,7 @@ function drawInputs() {
   }
 }
 
-//drawing a board
+//draws a board
 function drawBoard() {
   let board = document.getElementById("board");
   if (board.hasChildNodes()) {
