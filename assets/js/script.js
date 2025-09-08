@@ -20,7 +20,7 @@ window.onload = function () {
 }
 
 function onInit() {
-  addModeLisener();
+  addLiseners();
   if (localStorage.getItem("state") !== null) {
     loadState();
   } else {
@@ -28,12 +28,29 @@ function onInit() {
   }
 }
 
-function addModeLisener() {
+function addLiseners() {
+  addModeLiseners();
+  addRestartLisener();
+}
+
+function addModeLiseners() {
   const radios = document.querySelectorAll('input[name="mode"]');
   radios.forEach(radio => {
     //radio.addEventListener("change", changeMode);
     radio.addEventListener("click", newGame);
   });
+}
+
+function addRestartLisener() {
+  document.getElementById("restart").addEventListener("click", restart);
+}
+
+function restart() {
+  if (window.confirm("Do you want to restart this game?")) {
+    errors = 0;
+    state = puzzle;
+    start();
+  }
 }
 
 //starts a new game
