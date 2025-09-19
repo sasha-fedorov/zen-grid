@@ -143,9 +143,22 @@
   font-weight: 500;
 }
 
-.number-input-selected {
+#number-inputs>div:hover {
   background-color: var(--gray-200);
 }
+
+.tile-selected {
+  background-color: #c1e7cc;
+}
+
+.incorrect-number {
+  color: var(--bs-red);
+}
+
+.correct-number {
+  color: var(--bs-green);
+}
+
 
 h1 {
   font-family: "Goldman", sans-serif;

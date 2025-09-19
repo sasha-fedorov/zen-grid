@@ -2,7 +2,6 @@ import {
   generateSudoku
 } from "./generator.js"
 
-var numSelected = null;
 var tileSelected = null;
 
 var puzzle = null;
@@ -144,9 +143,20 @@ function drawBoard() {
       let tile = document.createElement("div");
       tile.id = getTileId(r, c);
       tile.classList.add("tile");
+
       if (puzzle[r][c] == 0) {
         tile.addEventListener("click", selectTile);
+
+        //coloring correct and incorrect inputted numbers
+        if (state[r][c] != 0) {
+          if (state[r][c] == solution[r][c]) {
+            tile.classList.add("correct-number");
+          } else {
+            tile.classList.add("incorrect-number");
+          }
+        }
       } else {
+        //adding prefilled tile style
         tile.classList.add("tile-prefilled");
       }
 
@@ -171,28 +181,27 @@ function drawBoard() {
 }
 
 function selectNumber() {
-  if (numSelected != null) {
-    numSelected.classList.remove("number-input-selected")
-  }
-
-  numSelected = this;
-  this.classList.add("number-input-selected")
-}
-
-function selectTile() {
-  if (numSelected) {
-    let coords = this.id.split("-");
+  if (tileSelected) {
+    //reading coords from tile id
+    let coords = tileSelected.id.split("-");
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
 
-    if (solution[r][c] == numSelected.id) {
-      this.innerText = numSelected.id;
-      state[r][c] = parseInt(numSelected.id);
+    //quit when correct number already placed
+    if (solution[r][c] == state[r][c]) {
+      return;
+    }
+
+    if (solution[r][c] == this.id) {
+      tileSelected.classList.add("correct-number");
     } else {
+      tileSelected.classList.add("incorrect-number");
       errors += 1;
       document.getElementById("errors-counter").innerText = errors;
     }
 
+    tileSelected.innerText = this.id;
+    state[r][c] = parseInt(this.id);
     updateState();
 
     //checks is puzzle done
@@ -200,6 +209,15 @@ function selectTile() {
       puzzleCompleteAlert();
     }
   }
+}
+
+function selectTile() {
+  if (tileSelected != null) {
+    tileSelected.classList.remove("tile-selected")
+  }
+
+  tileSelected = this;
+  this.classList.add("tile-selected")
 }
 
 //returns tile id in format row-column-sector
