@@ -33,7 +33,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   margin: 1rem auto;
 }
 
@@ -54,7 +53,6 @@
 #restart {
   width: 5rem;
   height: 2rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,7 +98,7 @@
 }
 
 .mode-selector input:checked+.mode-label {
-  background-color: var(--gray-200);
+  background-color: var(--gray-300);
 }
 
 .mode-selector input {
@@ -124,11 +122,11 @@
 }
 
 .sector-edge-horizontal {
-  border-bottom: 1px solid var(--gray-700);
+  border-bottom: 1px solid var(--gray-800);
 }
 
 .sector-edge-vertical {
-  border-right: 1px solid var(--gray-700);
+  border-right: 1px solid var(--gray-800);
 }
 
 .number-input {
@@ -138,7 +136,7 @@
   justify-content: center;
   align-items: center;
 
-  outline: 1px solid var(--gray-700);
+  border: 1px solid var(--gray-700);
 
   font-weight: 600;
 }
