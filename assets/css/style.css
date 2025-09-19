@@ -114,7 +114,8 @@
 
   border: 1px solid var(--gray-400);
 
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 .tile-prefilled {
@@ -138,7 +139,8 @@
 
   border: 1px solid var(--gray-700);
 
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 .number-input-selected {
