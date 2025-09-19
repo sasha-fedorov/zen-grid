@@ -55,11 +55,10 @@
 
 #board {
   width: 27rem;
-  height: 27rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(9, 3rem);
+  grid-template-rows: repeat(9, 3rem);
+  aspect-ratio: 1 / 1;
   margin: 0 auto;
 }
 
