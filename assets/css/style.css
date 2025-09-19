@@ -3,7 +3,9 @@
 :root {
   /* body font override */
   --bs-font-sans-serif: "Quicksand", Roboto, sans-serif;
-  font-size: 20px;
+
+  /* make page responsive for any screen */
+  font-size: min(calc(100vw / 30), calc(100vh / 42));
 
   --gray-100: #f8f9fa;
   --gray-200: #e9ecef;
