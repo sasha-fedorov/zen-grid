@@ -40,7 +40,7 @@ function solveSudoku(board) {
 }
 
 
-// Schuffle the board
+// Shuffle the board
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -52,17 +52,17 @@ function shuffle(array) {
 
 // Check is number can be placed in position
 function isSafe(board, row, col, num) {
-  //cheking row
+  //checking  row
   for (let x = 0; x < 9; x++) {
     if (board[row][x] === num) return false;
   }
 
-  //cheking column
+  //checking  column
   for (let y = 0; y < 9; y++) {
     if (board[y][col] === num) return false;
   }
 
-  //cheking sector
+  //checking  sector
   const startRow = row - (row % 3);
   const startCol = col - (col % 3);
   for (let r = startRow; r < startRow + 3; r++) {
@@ -75,7 +75,7 @@ function isSafe(board, row, col, num) {
 }
 
 
-// Ckeck number of solutions
+// Check number of solutions
 function countSolutions(board) {
   let count = 0;
 

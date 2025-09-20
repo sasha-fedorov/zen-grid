@@ -19,7 +19,7 @@ window.onload = function () {
 }
 
 function onInit() {
-  addLiseners();
+  addListeners();
   if (localStorage.getItem("state") !== null) {
     loadState();
   } else {
@@ -27,13 +27,13 @@ function onInit() {
   }
 }
 
-function addLiseners() {
-  addModeLiseners();
+function addListeners() {
+  addModeListeners();
   addRestartLisener();
   addTileResetLisener();
 }
 
-function addModeLiseners() {
+function addModeListeners() {
   const radios = document.querySelectorAll('input[name="mode"]');
   radios.forEach(radio => {
     radio.addEventListener("click", newGame);
@@ -96,7 +96,7 @@ function updatePuzzle() {
   localStorage.setItem("solution", JSON.stringify(solution));
 }
 
-//loads saved values from local storadge 
+//loads saved values from local storage
 function loadState() {
   errors = parseInt(localStorage.getItem("errors"));
   puzzle = JSON.parse(localStorage.getItem("puzzle"));
@@ -132,7 +132,7 @@ function generatePuzzle() {
   state = puzzle;
 }
 
-//adds number input elemnts
+//adds number input elements
 function drawInputs() {
   let numberInputs = document.getElementById("number-inputs");
   if (numberInputs.hasChildNodes()) {
@@ -238,7 +238,7 @@ function selectNumber() {
     state[r][c] = number;
     correctlyPlaced[number] = (correctlyPlaced[number] || 0) + 1;
 
-    //checks is puzzle done
+    //checks if the puzzle is done
     if (!state.flat().includes(0)) {
       puzzleCompleteAlert();
     }
@@ -278,22 +278,22 @@ function resetTile(e) {
 
   tileSelected.classList.remove("tile-selected");
   removeHighlight(tileSelected.id);
-  tileSelected == null;
+  tileSelected = null;
 }
 
 function addHighlight(id) {
-  let elements = getRowColSectorElemnts(id);
+  let elements = getRowColSectorelements(id);
   elements.forEach(e => e.classList.add("tile-highlight"));
   tileSelected.classList.add("tile-selected");
 }
 
 function removeHighlight(id) {
-  let elements = getRowColSectorElemnts(id);
+  let elements = getRowColSectorelements(id);
   elements.forEach(e => e.classList.remove("tile-highlight"));
   tileSelected.classList.remove("tile-selected");
 }
 
-function getRowColSectorElemnts(id) {
+function getRowColSectorelements(id) {
   const coords = parseTileId(id);
   return [
     ...document.querySelectorAll(`[id^="${coords[0]}-"]`),
@@ -316,7 +316,7 @@ function parseTileId(id) {
 
 //dispalays alert on puzzle complition
 function puzzleCompleteAlert() {
-  const info = " Click on preferred difficulty to start a new game."
+  const info = " Click on a preferred difficulty to start a new game."
 
   const withErrors = [
     "Congrats! You finished the puzzle. Start a new one, or click Restart to try again without mistakes.",
