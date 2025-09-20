@@ -3,7 +3,7 @@ import {
 } from "./generator.js"
 
 var tileSelected = null;
-var highlightedNumbers = null
+var highlightedNumbers = [];
 
 //correctly placed numbers count
 var correctlyPlaced = {};
@@ -305,6 +305,7 @@ function removeHighlight(id) {
 }
 
 function highlightNumbers(number) {
+  removeHighlightNumbers();
   let elements = [...document.getElementById("board").children];
   highlightedNumbers = elements.filter(e => e.textContent.trim() == number);
   highlightedNumbers.forEach(e => e.classList.add("tile-highlight"));
