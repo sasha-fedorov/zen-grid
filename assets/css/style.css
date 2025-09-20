@@ -89,6 +89,7 @@
   justify-content: center;
 
   border: 1px solid var(--gray-600);
+  cursor: pointer;
   border-right: none;
 }
 
@@ -118,6 +119,16 @@
   font-weight: 500;
 }
 
+.tile-highlight {
+  background: linear-gradient(rgba(var(--bs-success-rgb), 0.1), rgba(var(--bs-success-rgb), 0.1));
+  mix-blend-mode: multiply;
+  /* semi-transparent black */
+}
+
+.tile-selected {
+  background-color: rgba(var(--bs-success-rgb), 0.3);
+}
+
 .tile-prefilled {
   background-color: var(--gray-200);
 }
@@ -145,10 +156,6 @@
 
 #number-inputs>div:hover {
   background-color: var(--gray-200);
-}
-
-.tile-selected {
-  background-color: #c1e7cc;
 }
 
 .incorrect-number {
