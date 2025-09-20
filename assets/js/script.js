@@ -30,6 +30,7 @@ function onInit() {
 function addLiseners() {
   addModeLiseners();
   addRestartLisener();
+  addTileResetLisener();
 }
 
 function addModeLiseners() {
@@ -41,6 +42,10 @@ function addModeLiseners() {
 
 function addRestartLisener() {
   document.getElementById("restart").addEventListener("click", restart);
+}
+
+function addTileResetLisener() {
+  document.addEventListener("click", e => resetTile(e));
 }
 
 function restart() {
@@ -255,23 +260,38 @@ function selectTile() {
       return;
     }
 
-    tileSelected.classList.remove("tile-selected");
     removeHighlight(tileSelected.id);
   }
 
   tileSelected = this;
-  this.classList.add("tile-selected");
   addHighlight(this.id);
+}
+
+function resetTile(e) {
+  if (tileSelected == null) {
+    return;
+  }
+
+  //checking is traget id contains digits (valid only for tiles and inputs)
+  if (/\d/.test(e.target.id)) {
+    return;
+  }
+
+  tileSelected.classList.remove("tile-selected");
+  removeHighlight(tileSelected.id);
+  tileSelected == null;
 }
 
 function addHighlight(id) {
   let elements = getRowColSectorElemnts(id);
   elements.forEach(e => e.classList.add("tile-highlight"));
+  tileSelected.classList.add("tile-selected");
 }
 
 function removeHighlight(id) {
   let elements = getRowColSectorElemnts(id);
   elements.forEach(e => e.classList.remove("tile-highlight"));
+  tileSelected.classList.remove("tile-selected");
 }
 
 function getRowColSectorElemnts(id) {
