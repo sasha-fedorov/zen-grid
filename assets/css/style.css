@@ -6,25 +6,15 @@
 
   /* make page responsive for any screen */
   font-size: min(calc(100vw / 30), calc(100vh / 42));
-
-  --gray-100: #f8f9fa;
-  --gray-200: #e9ecef;
-  --gray-300: #dee2e6;
-  --gray-400: #ced4da;
-  --gray-500: #adb5bd;
-  --gray-600: #6c757d;
-  --gray-700: #495057;
-  --gray-800: #343a40;
-  --gray-900: #212529;
 }
 
 #header {
   width: 100%;
-  background-color: var(--gray-200);
+  background-color: var(--bs-gray-200);
 }
 
 #footer a {
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
   text-decoration: none;
 }
 
@@ -46,7 +36,7 @@
 }
 
 #errors-counter {
-  color: red;
+  color: var(--bs-red);
   font-weight: 600;
 }
 
@@ -57,7 +47,7 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--gray-600);
+  border: 1px solid var(--bs-gray-600);
   background-color: inherit;
 }
 
@@ -88,18 +78,19 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--gray-600);
   cursor: pointer;
+
+  border: 1px solid var(--bs-gray-600);
   border-right: none;
 }
 
 /* fixing double border in mode selector */
 .mode-selector>label:last-child {
-  border-right: 1px solid var(--gray-600);
+  border-right: 1px solid var(--bs-gray-600);
 }
 
 .mode-selector input:checked+.mode-label {
-  background-color: var(--gray-300);
+  background-color: var(--bs-gray-300);
 }
 
 .mode-selector input {
@@ -113,7 +104,7 @@
   justify-content: center;
   align-items: center;
 
-  border: 1px solid var(--gray-400);
+  border: 1px solid var(--bs-gray-400);
 
   font-size: 1.25rem;
   font-weight: 500;
@@ -130,15 +121,16 @@
 }
 
 .tile-prefilled {
-  background-color: var(--gray-200);
+  background-color: var(--bs-gray-200);
+  mix-blend-mode: multiply;
 }
 
 .sector-edge-horizontal {
-  border-bottom: 1px solid var(--gray-800);
+  border-bottom: 1px solid var(--bs-gray-800);
 }
 
 .sector-edge-vertical {
-  border-right: 1px solid var(--gray-800);
+  border-right: 1px solid var(--bs-gray-800);
 }
 
 .number-input {
@@ -148,14 +140,14 @@
   justify-content: center;
   align-items: center;
 
-  border: 1px solid var(--gray-700);
+  border: 1px solid var(--bs-gray-700);
 
   font-size: 1.25rem;
   font-weight: 500;
 }
 
 #number-inputs>div:hover {
-  background-color: var(--gray-200);
+  background-color: var(--bs-gray-200);
 }
 
 .incorrect-number {
@@ -163,7 +155,7 @@
 }
 
 .correct-number {
-  color: var(--bs-green);
+  color: var(--bs-info-text-emphasis);
 }
 
 
