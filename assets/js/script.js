@@ -60,6 +60,8 @@ function newGame(event) {
     generatePuzzle();
     start();
   }
+
+  document.getElementById(mode).checked = true;
 }
 
 //graving board and inputs for game
@@ -101,8 +103,7 @@ function loadState() {
 //updates loaded values on page
 function updateValues() {
   document.getElementById("errors-counter").innerText = errors;
-  let currentMode = document.getElementById(mode);
-  currentMode.checked = true;
+  document.getElementById(mode).checked = true;
 }
 
 //generates the puzzle
@@ -183,9 +184,9 @@ function drawBoard() {
 function selectNumber() {
   if (tileSelected) {
     //reading coords from tile id
-    let coords = tileSelected.id.split("-");
-    let r = parseInt(coords[0]);
-    let c = parseInt(coords[1]);
+    const coords = parseTileId(tileSelected.id);
+    const r = coords[0];
+    const c = coords[1];
 
     //quit when correct number already placed
     if (solution[r][c] == state[r][c]) {
@@ -213,17 +214,48 @@ function selectNumber() {
 
 function selectTile() {
   if (tileSelected != null) {
-    tileSelected.classList.remove("tile-selected")
+    if (tileSelected.id == this.id) {
+      return;
+    }
+
+    tileSelected.classList.remove("tile-selected");
+    removeHighlight(tileSelected.id);
   }
 
   tileSelected = this;
-  this.classList.add("tile-selected")
+  this.classList.add("tile-selected");
+  addHighlight(this.id);
+}
+
+function addHighlight(id) {
+  let elements = getRowColSectorElemnts(id);
+  elements.forEach(e => e.classList.add("tile-highlight"));
+}
+
+function removeHighlight(id) {
+  let elements = getRowColSectorElemnts(id);
+  elements.forEach(e => e.classList.remove("tile-highlight"));
+}
+
+function getRowColSectorElemnts(id) {
+  const coords = parseTileId(id);
+  return [
+    ...document.querySelectorAll(`[id^="${coords[0]}-"]`),
+    ...document.querySelectorAll(`[id*="-${coords[1]}-"]`),
+    ...document.querySelectorAll(`[id$="-${coords[2]}"]`)
+  ];
 }
 
 //returns tile id in format row-column-sector
 function getTileId(row, column) {
   let sector = ((column - column % 3) / 3) + (row - row % 3) + 1;
   return `${row}-${column}-${sector}`;
+}
+
+//returns tile id in format [row, column, sector]
+function parseTileId(id) {
+  let coords = tileSelected.id.split("-");
+  return [parseInt(coords[0]), parseInt(coords[1]), parseInt(coords[2])];
 }
 
 //dispalays alert on puzzle complition
