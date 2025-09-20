@@ -3,6 +3,7 @@ import {
 } from "./generator.js"
 
 var tileSelected = null;
+var highlightedNumbers = null
 
 //correctly placed numbers count
 var correctlyPlaced = {};
@@ -45,7 +46,7 @@ function addRestartLisener() {
 }
 
 function addTileResetLisener() {
-  document.addEventListener("click", e => resetTile(e));
+  document.addEventListener("click", e => resetHighlights(e));
 }
 
 function restart() {
@@ -70,6 +71,7 @@ function newGame(event) {
 
 //graving board and inputs for game
 function start() {
+  tileSelected = null;
   updateValues();
   checkCorrectlyPlacedNumbers();
   drawBoard();
@@ -212,12 +214,16 @@ function drawBoard() {
 }
 
 function selectNumber() {
+  const number = parseInt(this.id);
   if (tileSelected) {
+    if (highlightNumbers.length > 0) {
+      removeHighlightNumbers();
+    }
+
     //reading coords from tile id
     const coords = parseTileId(tileSelected.id);
     const r = coords[0];
     const c = coords[1];
-    const number = parseInt(this.id);
 
     //quit when correct number already placed
     if (solution[r][c] == state[r][c]) {
@@ -250,11 +256,13 @@ function selectNumber() {
     }
 
     updateState();
+  } else {
+    highlightNumbers(number);
   }
 }
 
 function selectTile() {
-  if (tileSelected != null) {
+  if (tileSelected) {
     if (tileSelected.id == this.id) {
       return;
     }
@@ -266,13 +274,16 @@ function selectTile() {
   addHighlight(this.id);
 }
 
-function resetTile(e) {
-  if (tileSelected == null) {
+//called on click outside of board and number inputs 
+function resetHighlights(e) {
+  //checking is traget id contains digits (valid only for tiles and inputs)
+  if (/\d/.test(e.target.id)) {
     return;
   }
 
-  //checking is traget id contains digits (valid only for tiles and inputs)
-  if (/\d/.test(e.target.id)) {
+  //removing highlited numbers and exit (no highlight by tile selection highlit to remove)
+  if (tileSelected == null) {
+    removeHighlightNumbers();
     return;
   }
 
@@ -291,6 +302,18 @@ function removeHighlight(id) {
   let elements = getRowColSectorelements(id);
   elements.forEach(e => e.classList.remove("tile-highlight"));
   tileSelected.classList.remove("tile-selected");
+}
+
+function highlightNumbers(number) {
+  let elements = [...document.getElementById("board").children];
+  highlightedNumbers = elements.filter(e => e.textContent.trim() == number);
+  highlightedNumbers.forEach(e => e.classList.add("tile-highlight"));
+}
+
+function removeHighlightNumbers() {
+  if (highlightNumbers.length > 0) {
+    highlightedNumbers.forEach(e => e.classList.remove("tile-highlight"));
+  }
 }
 
 function getRowColSectorelements(id) {
