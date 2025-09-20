@@ -233,6 +233,7 @@ function selectNumber() {
     if (solution[r][c] == number) {
       //if number placed correctly
       tileSelected.classList.add("correct-number");
+      correctlyPlaced[number] = (correctlyPlaced[number] || 0) + 1;
     } else {
       //if number placed incorrectly
       tileSelected.classList.add("incorrect-number");
@@ -242,7 +243,6 @@ function selectNumber() {
 
     tileSelected.innerText = number;
     state[r][c] = number;
-    correctlyPlaced[number] = (correctlyPlaced[number] || 0) + 1;
 
     //checks if the puzzle is done
     if (!state.flat().includes(0)) {
