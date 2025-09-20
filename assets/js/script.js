@@ -51,7 +51,6 @@ function addTileResetLisener() {
 function restart() {
   if (window.confirm("Do you want to restart this game?")) {
     errors = 0;
-    correctlyPlaced = {};
     state = puzzle;
     start();
   }
@@ -114,6 +113,7 @@ function updateValues() {
 
 //counting each correctly placed number
 function checkCorrectlyPlacedNumbers() {
+  correctlyPlaced = {};
   const flatState = state.flat();
   const flatSolution = solution.flat();
   for (let i = 0; i < flatState.length; i++) {
@@ -135,9 +135,8 @@ function generatePuzzle() {
 //adds number input elemnts
 function drawInputs() {
   let numberInputs = document.getElementById("number-inputs");
-  //not draws inputs when existed
   if (numberInputs.hasChildNodes()) {
-    return;
+    numberInputs.replaceChildren()
   }
 
   for (let i = 1; i <= 9; i++) {
