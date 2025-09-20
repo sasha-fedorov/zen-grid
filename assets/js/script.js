@@ -4,16 +4,16 @@ import {
 
 var tileSelected = null;
 
+//correctly placed numbers count
+var correctlyPlaced = {};
+
 var puzzle = null;
 var solution = null;
 var state = null;
 var mode = "medium";
-
 var errors = 0;
 
 window.onload = function () {
-  //localStorage.clear();
-
   onInit();
   start();
 }
@@ -35,7 +35,6 @@ function addLiseners() {
 function addModeLiseners() {
   const radios = document.querySelectorAll('input[name="mode"]');
   radios.forEach(radio => {
-    //radio.addEventListener("change", changeMode);
     radio.addEventListener("click", newGame);
   });
 }
@@ -47,6 +46,7 @@ function addRestartLisener() {
 function restart() {
   if (window.confirm("Do you want to restart this game?")) {
     errors = 0;
+    correctlyPlaced = {};
     state = puzzle;
     start();
   }
@@ -67,6 +67,7 @@ function newGame(event) {
 //graving board and inputs for game
 function start() {
   updateValues();
+  checkCorrectlyPlacedNumbers();
   drawBoard();
   drawInputs();
   saveGameState();
@@ -106,6 +107,18 @@ function updateValues() {
   document.getElementById(mode).checked = true;
 }
 
+//counting each correctly placed number
+function checkCorrectlyPlacedNumbers() {
+  const flatState = state.flat();
+  const flatSolution = solution.flat();
+  for (let i = 0; i < flatState.length; i++) {
+    let e = flatState[i];
+    if (flatState[i] == flatSolution[i]) {
+      correctlyPlaced[e] = (correctlyPlaced[e] || 0) + 1;
+    }
+  }
+}
+
 //generates the puzzle
 function generatePuzzle() {
   const generated = generateSudoku(mode);
@@ -125,11 +138,24 @@ function drawInputs() {
   for (let i = 1; i <= 9; i++) {
     let number = document.createElement("div"); //Number Input Element
     number.id = i;
-    number.innerText = i;
+
+    if (!isAllPlaced(i)) {
+      number.innerText = i;
+      number.addEventListener("click", selectNumber);
+    }
+
     number.classList.add("number-input");
-    number.addEventListener("click", selectNumber)
     numberInputs.appendChild(number);
   }
+}
+
+//checking is all of specified number placed
+function isAllPlaced(number) {
+  if (correctlyPlaced[number] == 9) {
+    return true;
+  }
+
+  return false;
 }
 
 //draws a board
@@ -187,28 +213,39 @@ function selectNumber() {
     const coords = parseTileId(tileSelected.id);
     const r = coords[0];
     const c = coords[1];
+    const number = parseInt(this.id);
 
     //quit when correct number already placed
     if (solution[r][c] == state[r][c]) {
       return;
     }
 
-    if (solution[r][c] == this.id) {
+    if (solution[r][c] == number) {
+      //if number placed correctly
       tileSelected.classList.add("correct-number");
     } else {
+      //if number placed incorrectly
       tileSelected.classList.add("incorrect-number");
       errors += 1;
       document.getElementById("errors-counter").innerText = errors;
     }
 
-    tileSelected.innerText = this.id;
-    state[r][c] = parseInt(this.id);
-    updateState();
+    tileSelected.innerText = number;
+    state[r][c] = number;
+    correctlyPlaced[number] = (correctlyPlaced[number] || 0) + 1;
 
     //checks is puzzle done
     if (!state.flat().includes(0)) {
       puzzleCompleteAlert();
     }
+
+    //remove input when all of this numbers placed
+    if (isAllPlaced(number)) {
+      this.innerText = "";
+      this.removeEventListener("click", selectNumber);
+    }
+
+    updateState();
   }
 }
 
