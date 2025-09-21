@@ -290,10 +290,12 @@ function selectNumber() {
       tileSelected.classList.add("correct-number");
       correctlyPlaced[number] = (correctlyPlaced[number] || 0) + 1;
     } else {
-      //if number placed incorrectly
-      tileSelected.classList.add("incorrect-number");
-      errors += 1;
-      document.getElementById("errors-counter").innerText = errors;
+      //if different number placed incorrectly
+      if (tileSelected.innerText != number) {
+        tileSelected.classList.add("incorrect-number");
+        errors += 1;
+        document.getElementById("errors-counter").innerText = errors;
+      }
     }
 
     tileSelected.innerText = number;
