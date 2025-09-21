@@ -35,7 +35,11 @@
       <!-- errors counter -->
       <p id="errors">Errors: <span id="errors-counter">0</span></p>
 
+      <!-- restart button -->
       <button id="restart" class="button">Restart</button>
+
+      <!-- help button -->
+      <button id="help-button" class="button help-button">?</button>
     </div>
 
     <!-- play board -->
@@ -47,11 +51,34 @@
     <!-- alert box -->
     <div id="alert" class="alert hidden">
       <div class="alert-container">
-        <p id="alert-text">Congrats! You finished the puzzle. Start a new one, or click Restart to try again without
-          mistakes. Click on a preferred difficulty to start a new game.</p>
+        <p id="alert-text"></p>
+        <div id="help" class="hidden">
+          <h2>How to play</h2>
+          <ol>
+            <li><strong>Goal:</strong> Fill the 9x9 grid so every row, column, <br> and 3x3 sector contains numbers 1-9.
+            </li>
+            <li>
+              <strong>Rules:</strong>
+              <ul>
+                <li>Each number 1-9 appears once per row.</li>
+                <li>Each number 1-9 appears once per column.</li>
+                <li>Each number 1-9 appears once per 3x3 box.</li>
+              </ul>
+            </li>
+            <li><strong>Start:</strong> Some numbers are already placed. <br> Use them as clues.</li>
+            <li>
+              <strong>Play:</strong>
+              <ul>
+                <li>Use intersections of rows, columns, and boxes to exclude impossible numbers.</li>
+                <li>Use logic (not guessing) to fill empty cells.</li>
+              </ul>
+            </li>
+            <li><strong>Win:</strong> The puzzle is solved once all cells are filled correctly.</li>
+          </ol>
+        </div>
         <div class="alert-buttons-container">
           <button id="alert-confirm" class="button">Ok</button>
-          <button id="alert-close" class="button hidden">Close</button>
+          <button id="alert-close" class="button">Close</button>
         </div>
       </div>
     </div>

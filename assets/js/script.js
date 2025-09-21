@@ -34,6 +34,7 @@ function addListeners() {
   addModeListeners();
   addTileResetLisener();
   addRestartLisener();
+  addHelpLisener();
   addAlertLisener();
 }
 
@@ -46,6 +47,10 @@ function addModeListeners() {
 
 function addRestartLisener() {
   document.getElementById("restart").addEventListener("click", onRestart);
+}
+
+function addHelpLisener() {
+  document.getElementById("help-button").addEventListener("click", onHelp);
 }
 
 function addAlertLisener() {
@@ -69,6 +74,19 @@ function restart() {
   start();
 }
 
+//on click help
+function onHelp() {
+  document.getElementById("alert-close").classList.add("hidden");
+  document.getElementById("help").classList.remove("hidden");
+  showAlert("", closeHelp);
+}
+
+//on confirm to hide help
+function closeHelp() {
+  document.getElementById("alert-close").classList.remove("hidden");
+  document.getElementById("help").classList.add("hidden");
+}
+
 //on click mode
 function onNewGame(event) {
   newMode = event.target.id;
@@ -86,8 +104,6 @@ function startNewGame() {
 }
 
 function confirmAlert() {
-  console.log(alertAction);
-
   if (alertAction) {
     alertAction();
   }
@@ -96,17 +112,12 @@ function confirmAlert() {
 }
 
 function closeAlert() {
-  document.getElementById("alert-close").classList.add("hidden");
   document.getElementById("alert").classList.add("hidden");
   alertAction = null;
 }
 
 function showAlert(message, onConfirm) {
   alertAction = onConfirm;
-  if (onConfirm) {
-    document.getElementById("alert-close").classList.remove("hidden");
-  }
-
   document.getElementById("alert-text").innerText = message;
   document.getElementById("alert").classList.remove("hidden");
 }
@@ -404,7 +415,7 @@ function puzzleCompleteAlert() {
 
   const hardPerfect = [
     "Outstanding! You mastered Hard mode with zero mistakes!",
-    "Incredible — a flawless Hard puzzle solve! You’re a true Sudoku pro.",
+    "Incredible — a flawless Hard puzzle solve! You're a true Sudoku pro.",
     "Perfect game! Hard mode completed without errors. Can you keep the streak?",
   ];
 
