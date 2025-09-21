@@ -1,6 +1,8 @@
+/* jshint esversion: 6 */
+
 import {
   generateSudoku
-} from "./generator.js"
+} from "./generator.js";
 
 var alertAction = null;
 var tileSelected = null;
@@ -19,7 +21,7 @@ var errors = 0;
 window.onload = function () {
   onInit();
   start();
-}
+};
 
 function onInit() {
   addListeners();
@@ -191,7 +193,7 @@ function generatePuzzle() {
 function drawInputs() {
   let numberInputs = document.getElementById("number-inputs");
   if (numberInputs.hasChildNodes()) {
-    numberInputs.replaceChildren()
+    numberInputs.replaceChildren();
   }
 
   for (let i = 1; i <= 9; i++) {
@@ -221,7 +223,7 @@ function isAllPlaced(number) {
 function drawBoard() {
   let board = document.getElementById("board");
   if (board.hasChildNodes()) {
-    board.replaceChildren()
+    board.replaceChildren();
   }
 
   for (let r = 0; r < 9; r++) {
@@ -393,7 +395,7 @@ function parseTileId(id) {
 
 //dispalays alert on puzzle complition
 function puzzleCompleteAlert() {
-  const info = " Click on a preferred difficulty to start a new game."
+  const info = " Click on a preferred difficulty to start a new game.";
 
   const withErrors = [
     "Congrats! You finished the puzzle. Start a new one, or click Restart to try again without mistakes.",
@@ -419,7 +421,7 @@ function puzzleCompleteAlert() {
     "Perfect game! Hard mode completed without errors. Can you keep the streak?",
   ];
 
-  const seed = Math.floor(Math.random() * 3);;
+  const seed = Math.floor(Math.random() * 3);
   let message = "";
 
   if (errors == 0) {

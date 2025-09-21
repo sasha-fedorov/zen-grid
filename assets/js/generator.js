@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 // Main function
 export function generateSudoku(difficulty = "medium") {
   const solution = createEmptyBoard();
