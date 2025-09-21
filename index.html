@@ -23,23 +23,24 @@
       <!-- mode selector -->
       <div id="mode" class="mode-selector">
         <input id="easy" type="radio" name="mode">
-        <label for="easy" class="mode-label">Easy</label>
+        <label for="easy" class="mode-label" aria-label="Begin a new game on easy difficulty">Easy</label>
 
         <input id="medium" type="radio" name="mode">
-        <label for="medium" class="mode-label">Medium</label>
+        <label for="medium" class="mode-label" aria-label="Begin a new game on medium difficulty">Medium</label>
 
         <input id="hard" type="radio" name="mode">
-        <label for="hard" class="mode-label">Hard</label>
+        <label for="hard" class="mode-label" aria-label="Begin a new game on hard difficulty">Hard</label>
       </div>
 
       <!-- errors counter -->
       <p id="errors">Errors: <span id="errors-counter">0</span></p>
 
       <!-- restart button -->
-      <button id="restart" class="button">Restart</button>
+      <button id="restart" class="button" aria-label="Restart the current puzzle">Restart</button>
 
       <!-- help button -->
-      <button id="help-button" class="button help-button">?</button>
+      <button id="help-button" class="button help-button" aria-label="Show game rules"
+        title="Show game rules">?</button>
     </div>
 
     <!-- play board -->
@@ -77,8 +78,8 @@
           </ol>
         </div>
         <div class="alert-buttons-container">
-          <button id="alert-confirm" class="button">Ok</button>
-          <button id="alert-close" class="button">Close</button>
+          <button id="alert-confirm" class="button" aria-label="Confirm this message">Ok</button>
+          <button id="alert-close" class="button" aria-label="Close this message">Close</button>
         </div>
       </div>
     </div>
