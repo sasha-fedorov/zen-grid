@@ -19,8 +19,10 @@ var newMode = "medium";
 var errors = 0;
 
 window.onload = function () {
-  onInit();
-  start();
+  if (document.getElementById("board")) {
+    onInit();
+    start();
+  }
 };
 
 function onInit() {
