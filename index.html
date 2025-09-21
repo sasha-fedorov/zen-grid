@@ -35,7 +35,7 @@
       <!-- errors counter -->
       <p id="errors">Errors: <span id="errors-counter">0</span></p>
 
-      <button id="restart">Restart</button>
+      <button id="restart" class="button">Restart</button>
     </div>
 
     <!-- play board -->
@@ -43,8 +43,19 @@
 
     <!-- inputs -->
     <div id="number-inputs"></div>
-  </main>
 
+    <!-- alert box -->
+    <div id="alert" class="alert hidden">
+      <div class="alert-container">
+        <p id="alert-text">Congrats! You finished the puzzle. Start a new one, or click Restart to try again without
+          mistakes. Click on a preferred difficulty to start a new game.</p>
+        <div class="alert-buttons-container">
+          <button id="alert-confirm" class="button">Ok</button>
+          <button id="alert-close" class="button hidden">Close</button>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <footer id="footer">
     <a href="https://github.com/sasha-fedorov" target="_blank" rel="external"

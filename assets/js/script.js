@@ -2,6 +2,7 @@ import {
   generateSudoku
 } from "./generator.js"
 
+var alertAction = null;
 var tileSelected = null;
 var highlightedNumbers = [];
 
@@ -12,6 +13,7 @@ var puzzle = null;
 var solution = null;
 var state = null;
 var mode = "medium";
+var newMode = "medium";
 var errors = 0;
 
 window.onload = function () {
@@ -30,43 +32,83 @@ function onInit() {
 
 function addListeners() {
   addModeListeners();
-  addRestartLisener();
   addTileResetLisener();
+  addRestartLisener();
+  addAlertLisener();
 }
 
 function addModeListeners() {
   const radios = document.querySelectorAll('input[name="mode"]');
   radios.forEach(radio => {
-    radio.addEventListener("click", newGame);
+    radio.addEventListener("click", onNewGame);
   });
 }
 
 function addRestartLisener() {
-  document.getElementById("restart").addEventListener("click", restart);
+  document.getElementById("restart").addEventListener("click", onRestart);
+}
+
+function addAlertLisener() {
+  document.getElementById("alert-confirm").addEventListener("click", confirmAlert);
+  document.getElementById("alert-close").addEventListener("click", closeAlert);
 }
 
 function addTileResetLisener() {
   document.addEventListener("click", e => resetHighlights(e));
 }
 
+//on click restart
+function onRestart() {
+  showAlert("Do you want to restart this game?", restart);
+}
+
+//restarts current puzzle
 function restart() {
-  if (window.confirm("Do you want to restart this game?")) {
-    errors = 0;
-    state = puzzle;
-    start();
-  }
+  errors = 0;
+  state = puzzle;
+  start();
+}
+
+//on click mode
+function onNewGame(event) {
+  newMode = event.target.id;
+  const message = "Do you want to start a new " + event.target.id + " game?";
+  showAlert(message, startNewGame);
+  document.getElementById(mode).checked = true;
 }
 
 //starts a new game
-function newGame(event) {
-  if (window.confirm("Do you want to start a new " + event.target.id + " game?")) {
-    errors = 0;
-    mode = event.target.id;
-    generatePuzzle();
-    start();
+function startNewGame() {
+  errors = 0;
+  mode = newMode;
+  generatePuzzle();
+  start();
+}
+
+function confirmAlert() {
+  console.log(alertAction);
+
+  if (alertAction) {
+    alertAction();
   }
 
-  document.getElementById(mode).checked = true;
+  closeAlert();
+}
+
+function closeAlert() {
+  document.getElementById("alert-close").classList.add("hidden");
+  document.getElementById("alert").classList.add("hidden");
+  alertAction = null;
+}
+
+function showAlert(message, onConfirm) {
+  alertAction = onConfirm;
+  if (onConfirm) {
+    document.getElementById("alert-close").classList.remove("hidden");
+  }
+
+  document.getElementById("alert-text").innerText = message;
+  document.getElementById("alert").classList.remove("hidden");
 }
 
 //graving board and inputs for game
