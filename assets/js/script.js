@@ -397,8 +397,6 @@ function parseTileId(id) {
 
 //dispalays alert on puzzle complition
 function puzzleCompleteAlert() {
-  const info = " Click on a preferred difficulty to start a new game.";
-
   const withErrors = [
     "Congrats! You finished the puzzle. Start a new one, or click Restart to try again without mistakes.",
     "Puzzle complete! You can pick another difficulty or restart to aim for a flawless solve.",
@@ -442,5 +440,10 @@ function puzzleCompleteAlert() {
     message = withErrors[seed];
   }
 
-  window.alert(message + info);
+  document.getElementById("alert-close").classList.add("hidden");
+  showAlert(message, closePuzzleCompleteAlert);
+}
+
+function closePuzzleCompleteAlert() {
+  document.getElementById("alert-close").classList.remove("hidden");
 }
