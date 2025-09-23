@@ -74,8 +74,8 @@ Zen Grid's typography is carefully selected for both readability and style. The 
 
 #### Font sizes
 
-- Base font size formula: `min(100vw ÷ 30, 100vh ÷ 42)`
-  - Scale text relative to the viewport width (100vw / 30).
+- Base font size formula: `min(100vw ÷ 29, 100vh ÷ 42)`
+  - Scale text relative to the viewport width (100vw / 29).
   - Scale text relative to the viewport height (100vh / 42).
   - Use the smaller of the two values to keep page and font sizes balanced in both portrait and landscape.
 - Main heading: `2.5rem`
