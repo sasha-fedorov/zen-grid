@@ -93,6 +93,12 @@ The site's only custom image is a favicon, which also serves as a brand logo in 
 
 ![Website Favicon and Header](documentation/images/header-and-favicon.png)
 
+### Wireframe
+
+The Zen Grid interface was designed with a specific visual blueprint in mind, captured in the wireframes below. These diagrams illustrate the site's modular design and mobile-first approach. By overlaying a grid on the main page layout, the wireframes provide a clear understanding of the site's proportions and how each component fits within the overall page ratio of 29x42. This ensures a consistent and balanced user experience that scales seamlessly across different screen sizes.
+
+![Wireframe](documentation/images/wireframe.webp)
+
 ### Features (Design Aspect)
 
 Zen Grid was designed with a modular, mobile-first approach. The layout uses CSS Flexbox and Grid to ensure the elements are well-proportioned across different screen sizes. The fluid font-size calculation and use of `rem` units ensure that all text scales gracefully, making the game playable on both mobile devices and larger screens.
