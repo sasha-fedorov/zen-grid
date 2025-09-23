@@ -10,7 +10,7 @@ This website is **deployed using GitHub Pages** and can be accessed at: **[https
 
 ## User Experience (UX) & User Stories
 
-The design of Zen Grid is guided by three core UX principles: Clarity, Intuitive Feedback, and a Streamlined Interface. Each ** Feature has been meticulously crafted to provide a user experience that is not only functional but also enjoyable and stress-free.
+The design of Zen Grid is guided by three core UX principles: Clarity, Intuitive Feedback, and a Streamlined Interface. Each Feature has been meticulously crafted to provide a user experience that is not only functional but also enjoyable and stress-free.
 
 ### User Stories and Features:
 - **Feature: Dynamic Puzzle Generation**
@@ -186,6 +186,7 @@ Zen Grid was designed with a modular, mobile-first approach. The layout uses CSS
 - **[Gemini](https://gemini.google.com/)** – helped generate content for this README
 - **[Am I Responsive](https://ui.dev/amiresponsive)** – used to create website mockup for this documentation
 - **[Coolors](https://coolors.co/)** – used to create website color palette for this documentation
+- **[Accessibility Checker](https://www.accessibilitychecker.org/audit)** – used to audit website accessibility and generate an accessibility compliance report
 
 
 ## Validation
@@ -201,6 +202,8 @@ I validated the deployed version of the website using the **official W3C tools**
 - [404 page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fsasha-fedorov.github.io%2Fzen-grid%2F404.html)
 
     ![404 Page validation](/documentation/images/html-validation-404.png)
+
+**All tests passed with no errors or warnings**, as confirmed by the validation result links above.
 
 ### CSS Validation
 
