@@ -160,7 +160,6 @@ Zen Grid was designed with a modular, mobile-first approach. The layout uses CSS
       ![Complition message logic](documentation/images/compition-message-code.png)
 
 
-
 ## Technologies Used
 
 ### Languages and Frameworks
@@ -223,7 +222,18 @@ I validated two project JavaScript files using the **[official JSHint tools](htt
 
 To evaluate and enhance the site’s performance, accessibility, best practices, and SEO, I ran **[Lighthouse](https://developer.chrome.com/docs/lighthouse)** audits using the deployed version on GitHub Pages. The final Lighthouse scores were all **98 or higher**.
 
+#### Final Scores
+- **Performance:** 98
+- **Accessibility:** 100
+- **Best Practices:** 100
+- **SEO:** 100
+
 ![Lighthouse Report Screenshot](documentation/images/lighthouse.png)
+
+
+## Testing and Bugfixing
+
+For detailed information about testing, bugfixing, validation, and performance improvements, please refer to **[TESTING.md](TESTING.md)**.
 
 
 ## Deployment & Local Development
